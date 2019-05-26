@@ -1,0 +1,106 @@
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+	<changeSet id="Initialize schema and database with properly code 2" author="akuchars">
+		<sql>
+<!--			DROP ALL OBJECTS delete files;-->
+			CREATE SCHEMA store;
+
+
+			CREATE TABLE store.client_addresses
+			(
+				id int not null auto_increment,
+				street text,
+				building_number text,
+				flat_number text,
+				postal_code text,
+				city text,
+				country text,
+				constraint store_Addresses_pk primary key (id)
+			);
+
+			CREATE TABLE store.clients
+			(
+				id int not null auto_increment,
+				name text,
+				surname text,
+				address_id int,
+				email text,
+				constraint store_clients_pk primary key (id),
+				constraint store_clients_client_addresses_fk foreign key (address_id) references store.client_addresses(id)
+			);
+
+			CREATE TABLE store.products
+			(
+				id int not null auto_increment,
+				name text,
+				color text,
+				status text not null default 'NEW',
+				price decimal(10,2),
+				constraint store_products_pk primary key (id)
+			);
+
+			CREATE TABLE store.orders
+			(
+			id int not null auto_increment,
+			client_id int,
+			constraint store_Order_pk primary key (id),
+			constraint store_Order_clients_fk foreign key (client_id) references store.clients(id)
+			);
+
+			CREATE TABLE store.order_items
+			(
+				id int not null auto_increment,
+				product_id int,
+				amount int,
+				order_id int,
+				constraint store_order_items_pk primary key (id),
+				constraint store_order_items_products_fk foreign key (product_id) references store.products(id),
+				constraint store_order_items_order_fk foreign key (order_id) references store.orders(id)
+			);
+
+			CREATE SCHEMA warehouse;
+
+			CREATE TABLE warehouse.streets
+			(
+				id int not null auto_increment,
+				name text,
+				constraint warehouse_streets_pk primary key (id)
+			);
+
+			CREATE TABLE warehouse.stillages
+			(
+				id int not null auto_increment,
+				name text,
+				constraint warehouse_stillages_pk primary key (id)
+			);
+
+			CREATE TABLE warehouse.shelves
+			(
+				id int not null auto_increment,
+				name text,
+				constraint warehouse_shelves_pk primary key (id)
+			);
+
+			CREATE TABLE warehouse.product_addresses
+			(
+				id int not null auto_increment,
+				product_id int,
+				street_id int,
+				stillage_id int,
+				shelf_id int,
+				amount int,
+<!--		//todo uniqe i nałożyć indexy	-->
+				constraint warehouse_product_addresses_pk primary key (id),
+				constraint store_ProductAddress_products_fk foreign key (product_id) references store.products(id),
+				constraint store_ProductAddress_Street_fk foreign key (street_id) references warehouse.streets(id),
+				constraint store_ProductAddress_Stillage_fk foreign key (stillage_id) references warehouse.stillages(id),
+				constraint store_ProductAddress_Shelf_fk foreign key (shelf_id) references warehouse.shelves(id)
+			);
+
+		</sql>
+	</changeSet>
+</databaseChangeLog>
