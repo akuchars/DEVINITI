@@ -14,10 +14,11 @@ import org.springframework.context.ApplicationEventPublisher;
 import akuchars.domain.common.AbstractJpaEntity;
 import akuchars.domain.store.event.CreatedOrderEvent;
 import akuchars.domain.store.repository.CreateOrderValidator;
+import akuchars.kernel.ApplicationProperties;
 import kotlin.jvm.internal.Intrinsics;
 
 @Entity
-@Table(schema = "store", name = "orders")
+@Table(schema = ApplicationProperties.STORE_SCHEMA_NAME, name = "orders")
 public class Order extends AbstractJpaEntity {
     @OneToOne
     @JoinColumn(name = "client_id")

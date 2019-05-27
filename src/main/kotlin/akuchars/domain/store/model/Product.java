@@ -18,11 +18,12 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.context.ApplicationEventPublisher;
 
 import akuchars.domain.common.AbstractJpaEntity;
+import akuchars.kernel.ApplicationProperties;
 import kotlin.jvm.internal.Intrinsics;
 
 @Entity
 @Access(AccessType.FIELD)
-@Table(schema = "store", name = "products")
+@Table(schema = ApplicationProperties.STORE_SCHEMA_NAME, name = "products")
 public class Product extends AbstractJpaEntity {
 
     @Embedded

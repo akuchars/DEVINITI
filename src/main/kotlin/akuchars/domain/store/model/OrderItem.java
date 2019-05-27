@@ -8,10 +8,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import akuchars.domain.common.AbstractJpaEntity;
+import akuchars.kernel.ApplicationProperties;
 import kotlin.jvm.internal.Intrinsics;
 
 @Entity
-@Table(schema = "store", name = "order_items")
+@Table(schema = ApplicationProperties.STORE_SCHEMA_NAME, name = "order_items")
 public class OrderItem extends AbstractJpaEntity {
     @OneToOne
     @JoinColumn(name = "product_id")
@@ -28,7 +29,7 @@ public class OrderItem extends AbstractJpaEntity {
 
     public OrderItem(Product product, OrderItemsAmount amount) {
         Intrinsics.checkParameterIsNotNull(product, "product");
-        Intrinsics.checkParameterIsNotNull(amount, "price");
+        Intrinsics.checkParameterIsNotNull(amount, "amount");
         this.product = product;
         this.amount = amount;
     }

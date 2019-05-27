@@ -7,11 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import akuchars.domain.common.AbstractJpaEntity;
+import akuchars.kernel.ApplicationProperties;
 import kotlin.jvm.internal.Intrinsics;
 
 @Entity
 @Access(AccessType.FIELD)
-@Table(schema = "warehouse", name = "shelves")
+@Table(schema = ApplicationProperties.WAREHOUSE_SCHEMA_NAME, name = "shelves")
 public class Shelf extends AbstractJpaEntity {
     private String name;
 

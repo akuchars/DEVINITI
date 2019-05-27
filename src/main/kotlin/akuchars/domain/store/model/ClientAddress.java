@@ -10,11 +10,12 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import akuchars.domain.common.AbstractJpaEntity;
+import akuchars.kernel.ApplicationProperties;
 import kotlin.jvm.internal.Intrinsics;
 
 @Entity
 @Access(AccessType.FIELD)
-@Table(schema = "store", name = "client_addresses")
+@Table(schema = ApplicationProperties.STORE_SCHEMA_NAME, name = "client_addresses")
 public class ClientAddress extends AbstractJpaEntity {
 
     private String street;

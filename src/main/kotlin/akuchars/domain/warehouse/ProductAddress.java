@@ -15,10 +15,11 @@ import com.mysema.commons.lang.Assert;
 
 import akuchars.domain.common.AbstractJpaEntity;
 import akuchars.domain.store.model.Product;
+import akuchars.kernel.ApplicationProperties;
 import kotlin.jvm.internal.Intrinsics;
 
 @Entity
-@Table(schema = "warehouse", name = "product_addresses")
+@Table(schema = ApplicationProperties.WAREHOUSE_SCHEMA_NAME, name = "product_addresses")
 @Access(AccessType.FIELD)
 public class ProductAddress extends AbstractJpaEntity {
 
