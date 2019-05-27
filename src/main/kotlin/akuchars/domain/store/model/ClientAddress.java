@@ -1,6 +1,7 @@
 package akuchars.domain.store.model;
 
 import akuchars.domain.AbstractJpaEntity;
+import kotlin.jvm.internal.Intrinsics;
 
 import javax.persistence.*;
 
@@ -35,6 +36,12 @@ public class ClientAddress extends AbstractJpaEntity {
     }
 
     public ClientAddress(String street, String buildingNumber, String flatNumber, PostalCode postalCode, City city, Country country) {
+        Intrinsics.checkParameterIsNotNull(street, "street");
+        Intrinsics.checkParameterIsNotNull(buildingNumber, "buildingNumber");
+        Intrinsics.checkParameterIsNotNull(flatNumber, "flatNumber");
+        Intrinsics.checkParameterIsNotNull(postalCode, "postalCode");
+        Intrinsics.checkParameterIsNotNull(city, "city");
+        Intrinsics.checkParameterIsNotNull(country, "country");
         this.street = street;
         this.buildingNumber = buildingNumber;
         this.flatNumber = flatNumber;

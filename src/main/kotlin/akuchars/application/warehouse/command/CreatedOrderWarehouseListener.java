@@ -12,6 +12,7 @@ import akuchars.domain.warehouse.QProductAddress;
 import kotlin.jvm.internal.Intrinsics;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -33,6 +34,7 @@ public class CreatedOrderWarehouseListener implements ApplicationListener<Create
     }
 
     @Override
+    @Transactional
     public void onApplicationEvent(CreatedOrderEvent event) {
         Order order = orderRepository.findById(event.getOrderId()).get();
         List<ProductAddress> products = order.getItems().stream()

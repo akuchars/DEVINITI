@@ -33,6 +33,7 @@ public class ProductQueryServiceImpl implements ProductQueryService {
     @Override
     @Transactional(readOnly = true)
     public ProductsDto findProductsByName(@NotNull String productName) {
+        Intrinsics.checkParameterIsNotNull(productName, "productName");
         Collection<ProductAddress> products = (Collection<ProductAddress>) productAddressRepository
                 .findAll(e.product.name.value.eq(productName));
 
@@ -45,6 +46,7 @@ public class ProductQueryServiceImpl implements ProductQueryService {
     @Override
     @Transactional(readOnly = true)
     public Page<ProductDto> findProductReadyToBuy(@NotNull Pageable pageable) {
+        Intrinsics.checkParameterIsNotNull(pageable, "pageable");
         return productAddressRepository
                 .findAll(e.product.status.eq(ProductStatus.TO_BUY), pageable)
                 .map(this::mapToDto);

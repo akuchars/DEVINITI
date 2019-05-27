@@ -6,6 +6,7 @@ import akuchars.domain.store.repository.OrderRepository
 import akuchars.domain.store.repository.ProductRepository
 import org.springframework.context.ApplicationListener
 import org.springframework.stereotype.Component
+import org.springframework.transaction.annotation.Transactional
 
 @Component
 class CreatedOrderStoreListener (
@@ -13,6 +14,7 @@ class CreatedOrderStoreListener (
         private val productRepository: ProductRepository
 ): ApplicationListener<CreatedOrderEvent> {
 
+    @Transactional
     override fun onApplicationEvent(event: CreatedOrderEvent) {
         val order = orderRepository.findById(event.orderId).get()
         markProductsAsSold(order)

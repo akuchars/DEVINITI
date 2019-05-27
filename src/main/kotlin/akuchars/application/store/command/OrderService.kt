@@ -30,7 +30,7 @@ class OrderService(
         return Order(client, buildOrderItems(orderDto)).apply {
             orderRepository.save(this)
             makeOrder(applicationEventPublisher, createOrderValidator)
-        }.let { OrderDto(it.items.map { orderItem -> OrderItemDto(orderItem.product.id!!, orderItem.amount.amount) }) }
+        }.let { OrderDto(it.items.map { orderItem -> OrderItemDto(orderItem.product.id, orderItem.amount.amount) }) }
     }
 
     private fun buildOrderItems(orderDto: OrderDto): List<OrderItem> {

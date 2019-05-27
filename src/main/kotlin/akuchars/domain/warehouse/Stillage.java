@@ -1,6 +1,7 @@
 package akuchars.domain.warehouse;
 
 import akuchars.domain.AbstractJpaEntity;
+import kotlin.jvm.internal.Intrinsics;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -17,6 +18,7 @@ public class Stillage extends AbstractJpaEntity {
     }
 
     public Stillage(String name) {
+        Intrinsics.checkParameterIsNotNull(name, "name");
         this.name = name;
     }
 }

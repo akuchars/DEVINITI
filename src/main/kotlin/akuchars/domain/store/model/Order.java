@@ -33,7 +33,10 @@ public class Order extends AbstractJpaEntity {
         this.items = items;
     }
 
-    public Order makeOrder(ApplicationEventPublisher applicationEventPublisher, CreateOrderValidator createOrderValidator) {
+    public Order makeOrder(ApplicationEventPublisher applicationEventPublisher,
+                           CreateOrderValidator createOrderValidator) {
+        Intrinsics.checkParameterIsNotNull(applicationEventPublisher, "applicationEventPublisher");
+        Intrinsics.checkParameterIsNotNull(createOrderValidator, "createOrderValidator");
         if (createOrderValidator.validateThatOrderCanBeComplex(this)) {
             applicationEventPublisher.publishEvent(new CreatedOrderEvent(id, this));
             return this;

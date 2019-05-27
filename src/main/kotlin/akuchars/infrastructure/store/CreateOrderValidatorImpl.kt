@@ -14,15 +14,15 @@ class CreateOrderValidatorImpl (private val productAddressRepository: ProductAdd
     override fun validateThatOrderCanBeComplex(order: Order): Boolean {
         order.items.forEach {
             if (it.product.isReadyToBuy.not())
-                throw ProductIsNotReadyToBuyException(it.product.id!!)
+                throw ProductIsNotReadyToBuyException(it.product.id)
             if (isProductAvailableInWarehouse(it).not())
-                throw ProductNotInWarehouseException(it.product.id!!)
+                throw ProductNotInWarehouseException(it.product.id)
         }
         return true
     }
 
     private fun isProductAvailableInWarehouse(it: OrderItem) =
-            productAddressRepository.findById(it.product.id!!).get().productAmount.amount >= it.amount.amount
+            productAddressRepository.findById(it.product.id).get().productAmount.amount >= it.amount.amount
 }
 
 class ProductIsNotReadyToBuyException(val id: Long): RuntimeException("Product by id $id is not ready to buy")

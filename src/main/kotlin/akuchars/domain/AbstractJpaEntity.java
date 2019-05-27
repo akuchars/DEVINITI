@@ -1,27 +1,31 @@
 package akuchars.domain;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.persistence.*;
 import java.util.Objects;
+
+import kotlin.jvm.internal.Intrinsics;
 
 @MappedSuperclass
 @Access(AccessType.FIELD)
 public abstract class AbstractJpaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Nullable
     protected Long id;
 
     public AbstractJpaEntity() {
     }
 
-    @Nullable
+    @NotNull
     public Long getId() {
+        Intrinsics.checkParameterIsNotNull(id, "id");
         return id;
     }
 
     public void setId(@Nullable Long id) {
+        Intrinsics.checkParameterIsNotNull(id, "id");
         this.id = id;
     }
 

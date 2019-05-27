@@ -40,7 +40,7 @@ class WarehouseService(
         return productRepository.findById(productId)
                 .map { it.markToBuy(applicationEventPublisher, price) }
                 .map { productRepository.save(it) }
-                .map { ProductDataDto(it.id!!, it.name.value, it.color.toDto(), it.price.value) }
+                .map { ProductDataDto(it.id, it.name.value, it.color.toDto(), it.price.value) }
                 .orElse(null)
     }
 

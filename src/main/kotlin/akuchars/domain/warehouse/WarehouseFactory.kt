@@ -14,6 +14,6 @@ class WarehouseFactory(
     fun createProductAddress(product: Product, street: Street, stillage: Stillage,  shelf: Shelf, amount: Long) {
         val productAddress = ProductAddress(product, street, stillage, shelf, ProductAmount(amount))
         val id = productAddressRepository.save(productAddress).id
-        applicationEventPublisher.publishEvent(AddedProductToWarehouse(id!!, this))
+        applicationEventPublisher.publishEvent(AddedProductToWarehouse(id, this))
     }
 }
