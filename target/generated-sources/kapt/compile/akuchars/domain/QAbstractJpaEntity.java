@@ -8,6 +8,8 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 
+import akuchars.domain.common.AbstractJpaEntity;
+
 
 /**
  * QAbstractJpaEntity is a Querydsl query type for AbstractJpaEntity

@@ -1,13 +1,20 @@
 package akuchars.domain.store.model;
 
-import akuchars.domain.AbstractJpaEntity;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.springframework.context.ApplicationEventPublisher;
+
+import akuchars.domain.common.AbstractJpaEntity;
 import akuchars.domain.store.event.CreatedOrderEvent;
 import akuchars.domain.store.repository.CreateOrderValidator;
 import kotlin.jvm.internal.Intrinsics;
-import org.springframework.context.ApplicationEventPublisher;
-
-import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(schema = "store", name = "orders")

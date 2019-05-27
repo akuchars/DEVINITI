@@ -1,13 +1,24 @@
 package akuchars.domain.store.model;
 
 
-import akuchars.domain.AbstractJpaEntity;
-import kotlin.jvm.internal.Intrinsics;
+import java.math.BigDecimal;
+
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Table;
+
 import org.jetbrains.annotations.NotNull;
 import org.springframework.context.ApplicationEventPublisher;
 
-import javax.persistence.*;
-import java.math.BigDecimal;
+import akuchars.domain.common.AbstractJpaEntity;
+import kotlin.jvm.internal.Intrinsics;
 
 @Entity
 @Access(AccessType.FIELD)

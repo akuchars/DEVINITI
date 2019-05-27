@@ -1,9 +1,14 @@
 package akuchars.domain.store.model;
 
-import akuchars.domain.AbstractJpaEntity;
-import kotlin.jvm.internal.Intrinsics;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-import javax.persistence.*;
+import akuchars.domain.common.AbstractJpaEntity;
+import kotlin.jvm.internal.Intrinsics;
 
 @Entity
 @Table(schema = "store", name = "order_items")

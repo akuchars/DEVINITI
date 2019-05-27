@@ -1,10 +1,16 @@
-package akuchars.domain;
+package akuchars.domain.common;
+
+import java.util.Objects;
+
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import javax.persistence.*;
-import java.util.Objects;
 
 import kotlin.jvm.internal.Intrinsics;
 

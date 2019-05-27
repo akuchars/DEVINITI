@@ -1,13 +1,13 @@
 package akuchars.domain.warehouse;
 
 
-import akuchars.domain.AbstractJpaEntity;
-import kotlin.jvm.internal.Intrinsics;
-
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
+import akuchars.domain.common.AbstractJpaEntity;
+import kotlin.jvm.internal.Intrinsics;
 
 @Entity
 @Access(AccessType.FIELD)
