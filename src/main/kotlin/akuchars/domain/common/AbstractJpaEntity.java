@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import kotlin.jvm.internal.Intrinsics;
@@ -24,9 +23,7 @@ public abstract class AbstractJpaEntity {
     public AbstractJpaEntity() {
     }
 
-    @NotNull
     public Long getId() {
-        Intrinsics.checkParameterIsNotNull(id, "id");
         return id;
     }
 
