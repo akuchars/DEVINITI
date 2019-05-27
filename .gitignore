@@ -1,0 +1,12 @@
+# Maven #
+##########
+/target
+*/target
+/.mvn/maven.config
+
+# IDE #
+###########
+!.idea/
+.idea/*
+!.idea/runConfigurations
+*.iml
