@@ -8,6 +8,9 @@ import akuchars.ui.rest.dto.ProductRestDto
 import akuchars.ui.rest.dto.ProductsRestDto
 import akuchars.ui.rest.dto.toDto
 import akuchars.ui.rest.dto.toRestDto
+import io.swagger.annotations.ApiImplicitParam
+import io.swagger.annotations.ApiImplicitParams
+import io.swagger.annotations.ApiOperation
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.web.bind.annotation.GetMapping
@@ -27,17 +30,30 @@ class ProductRestController(
 	private val productQueryService: ProductQueryService
 ) {
 
+	@ApiOperation("Create new order")
+	@ApiImplicitParams(
+		ApiImplicitParam(name = "productId", value = "Product id", required = true, dataType = "long", paramType = "path"),
+		ApiImplicitParam(name = "amount", value = "Amount to sale product", required = true, dataType = "long", paramType = "query")
+	)
 	@PostMapping("/{productId}/markToBuy")
 	fun markToBuy(@PathVariable productId: Long, @RequestParam amount: BigDecimal): ProductDataRestDto? {
 		return warehouseService.markProductAsToBuy(productId, amount)?.toRestDto()
 	}
 
+	@ApiOperation("Get products for given name")
+	@ApiImplicitParams(
+		ApiImplicitParam(name = "productName", value = "Product id", required = true, dataType = "string", paramType = "path")
+	)
 	@ResponseBody
 	@GetMapping("/{productName}")
 	fun getProductsByName(@PathVariable productName: String): ProductsRestDto {
 		return productQueryService.getProductsByName(productName).toRestDto()
 	}
 
+	@ApiOperation("Create product and add to warehouse")
+	@ApiImplicitParams(
+		ApiImplicitParam(name = "productCreatorRestDto", value = "Product data with localization", required = true, dataTypeClass = ProductCreatorRestDto::class, paramType = "body")
+	)
 	@ResponseBody
 	@PostMapping("/create")
 	fun addProductToWarehouse(@RequestBody productCreatorRestDto: ProductCreatorRestDto): ProductRestDto {
@@ -48,6 +64,11 @@ class ProductRestController(
 		).toRestDto()
 	}
 
+	@ApiOperation("Get available to buy products")
+	@ApiImplicitParams(
+		ApiImplicitParam(name = "page", value = "Actual page", required = false, dataType = "long", paramType = "query", defaultValue = "0"),
+		ApiImplicitParam(name = "size", value = "Maximum items on page", required = false, dataType = "long", paramType = "query", defaultValue = "500")
+	)
 	@GetMapping("/available")
 	fun getAvailableProduct(
 		@RequestParam(defaultValue = "0") page: Int,

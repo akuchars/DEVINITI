@@ -38,7 +38,7 @@ internal class WarehouseServiceTest {
 			ProductDataDto(name = "some extra name", colorDto = BLACK, price = 123.toBigDecimal()),
 			ProductLocalizationDto(1L, 1L, 1L),
 			100L
-		)
+		).data.id!!
 
 		//then
 		assertThat(productAddressRepository.existsById(productId))
@@ -52,7 +52,7 @@ internal class WarehouseServiceTest {
 			ProductDataDto(name = "some extra name", colorDto = BLACK, price = 123.toBigDecimal()),
 			ProductLocalizationDto(1L, 1L, 1L),
 			100L
-		)
+		).data.id!!
 		val productPrice = 100.toBigDecimal()
 
 		//when
