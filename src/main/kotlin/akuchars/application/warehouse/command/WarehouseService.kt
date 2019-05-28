@@ -1,9 +1,11 @@
 package akuchars.application.warehouse.command
 
 import akuchars.application.warehouse.model.ProductDataDto
+import akuchars.application.warehouse.model.ProductDto
 import akuchars.application.warehouse.model.ProductLocalizationDto
 import akuchars.application.warehouse.model.toDto
 import akuchars.application.warehouse.model.toEntity
+import akuchars.application.warehouse.query.ProductQueryService
 import akuchars.domain.store.model.Price
 import akuchars.domain.store.model.Product
 import akuchars.domain.store.model.ProductName
@@ -20,20 +22,21 @@ import javax.persistence.EntityNotFoundException
 
 @Service
 class WarehouseService(
-        private val productRepository: ProductRepository,
-        private val warehouseFactory: WarehouseFactory,
-        private val streetRepository: StreetRepository,
-        private val stillageRepository: StillageRepository,
-        private val shelfRepository: ShelfRepository,
-        private val applicationEventPublisher: ApplicationEventPublisher
+    private val productRepository: ProductRepository,
+    private val productQueryService: ProductQueryService,
+    private val warehouseFactory: WarehouseFactory,
+    private val streetRepository: StreetRepository,
+    private val stillageRepository: StillageRepository,
+    private val shelfRepository: ShelfRepository,
+    private val applicationEventPublisher: ApplicationEventPublisher
 ) {
 
     @Transactional
-    fun addNewProductToWarehouse(productDto: ProductDataDto, productLocalization: ProductLocalizationDto, amount: Long): Long {
+    fun addNewProductToWarehouse(productDto: ProductDataDto, productLocalization: ProductLocalizationDto, amount: Long): ProductDto {
         val product = Product(ProductName(productDto.name), productDto.colorDto.toEntity(), Price(productDto.price))
         val productId = productRepository.save(product).id
         createProductAddress(product, productLocalization, amount)
-        return productId
+        return productQueryService.getProductById(productId)
     }
 
     @Transactional

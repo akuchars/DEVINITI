@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -67,6 +69,14 @@ public class ProductQueryServiceImpl implements ProductQueryService {
 			.map(ProductAddress::getProductAmount)
 			.map(ProductAmount::getAmount)
 			.orElse(0L);
+	}
+
+	@NotNull
+	@Override
+	public ProductDto getProductById(long productId) {
+		return productAddressRepository
+			.findOne(e.product.id.eq(productId)).map(this::mapToDto)
+			.orElseThrow(EntityNotFoundException::new);
 	}
 
 	@NotNull

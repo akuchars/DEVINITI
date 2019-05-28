@@ -51,7 +51,7 @@ abstract class AbstractOrderServiceTest {
 			ProductDataDto(name = "", colorDto = BLACK, price = BigDecimal.TEN),
 			ProductLocalizationDto(1L, 1L, 1L),
 			PRODUCT_AMOUNT_IN_WAREHOUSE
-		)
+		).data.id!!
 	}
 
 	protected fun createNewOrder(productId: Long): OrderDto {
