@@ -2,10 +2,15 @@ package akuchars.ui.rest.dto
 
 import akuchars.application.store.model.OrderDto
 import akuchars.application.store.model.OrderItemDto
-import akuchars.application.warehouse.model.*
+import akuchars.application.warehouse.model.ProductColorDto
+import akuchars.application.warehouse.model.ProductDataDto
+import akuchars.application.warehouse.model.ProductDto
+import akuchars.application.warehouse.model.ProductLocalizationDto
+import akuchars.application.warehouse.model.ProductStatusDto
+import akuchars.application.warehouse.model.ProductsDto
 
 fun OrderRestDto.toDto(): OrderDto =
-        OrderDto(orderItemDto.toDto())
+    OrderDto(id, orderItemDto.toDto())
 
 fun List<OrderItemRestDto>.toDto(): List<OrderItemDto> =
         this.map { OrderItemDto(it.productId!!, it.amount!!) }
@@ -31,7 +36,7 @@ fun ProductLocalizationDto.toRestDto(): ProductLocalizationRestDto =
         ProductLocalizationRestDto(streetId, stillageId, shelfId)
 
 fun ProductDataDto.toRestDto(): ProductDataRestDto =
-        ProductDataRestDto(id, name, colorDto.toRestDto(), price)
+    ProductDataRestDto(id!!, name, colorDto.toRestDto(), price)
 
 fun ProductColorDto.toRestDto(): ProductColorRestDto =
         when (this) {
@@ -39,4 +44,4 @@ fun ProductColorDto.toRestDto(): ProductColorRestDto =
             ProductColorDto.YELLOW -> ProductColorRestDto.YELLOW
         }
 
-fun OrderDto.toRestDto(): OrderRestDto = OrderRestDto(orderItemDto.map { OrderItemRestDto(it.productId, it.amount) })
+fun OrderDto.toRestDto(): OrderRestDto = OrderRestDto(id, orderItemDto.map { OrderItemRestDto(it.productId, it.amount) })

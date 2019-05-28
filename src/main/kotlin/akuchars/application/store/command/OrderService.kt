@@ -9,7 +9,6 @@ import akuchars.domain.store.repository.ClientRepository
 import akuchars.domain.store.repository.CreateOrderValidator
 import akuchars.domain.store.repository.OrderRepository
 import akuchars.domain.store.repository.ProductRepository
-import org.springframework.context.ApplicationEvent
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
@@ -30,7 +29,7 @@ class OrderService(
         return Order(client, buildOrderItems(orderDto)).apply {
             orderRepository.save(this)
             makeOrder(applicationEventPublisher, createOrderValidator)
-        }.let { OrderDto(it.items.map { orderItem -> OrderItemDto(orderItem.product.id, orderItem.amount.amount) }) }
+        }.let { OrderDto(it.id, it.items.map { orderItem -> OrderItemDto(orderItem.product.id, orderItem.amount.amount) }) }
     }
 
     private fun buildOrderItems(orderDto: OrderDto): List<OrderItem> {

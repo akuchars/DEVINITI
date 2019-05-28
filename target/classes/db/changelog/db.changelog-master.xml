@@ -4,11 +4,10 @@
 		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-	<changeSet id="Initialize schema and database with properly code 2" author="akuchars">
+	<changeSet id="Initialize schema and database " author="akuchars">
 		<sql>
 <!--			DROP ALL OBJECTS delete files;-->
 			CREATE SCHEMA store;
-
 
 			CREATE TABLE store.client_addresses
 			(

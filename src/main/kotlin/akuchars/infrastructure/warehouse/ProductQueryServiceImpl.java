@@ -20,6 +20,7 @@ import akuchars.application.warehouse.query.ProductQueryService;
 import akuchars.domain.store.model.ProductStatus;
 import akuchars.domain.warehouse.ProductAddress;
 import akuchars.domain.warehouse.ProductAddressRepository;
+import akuchars.domain.warehouse.ProductAmount;
 import akuchars.domain.warehouse.QProductAddress;
 import kotlin.jvm.internal.Intrinsics;
 
@@ -38,7 +39,7 @@ public class ProductQueryServiceImpl implements ProductQueryService {
 	@NotNull
 	@Override
 	@Transactional(readOnly = true)
-	public ProductsDto findProductsByName(@NotNull String productName) {
+	public ProductsDto getProductsByName(@NotNull String productName) {
 		Intrinsics.checkParameterIsNotNull(productName, "productName");
 		Collection<ProductAddress> products = (Collection<ProductAddress>) productAddressRepository
 			.findAll(e.product.name.value.eq(productName));
@@ -52,11 +53,20 @@ public class ProductQueryServiceImpl implements ProductQueryService {
 	@NotNull
 	@Override
 	@Transactional(readOnly = true)
-	public Page<ProductDto> findProductReadyToBuy(@NotNull Pageable pageable) {
+	public Page<ProductDto> getProductReadyToBuy(@NotNull Pageable pageable) {
 		Intrinsics.checkParameterIsNotNull(pageable, "pageable");
 		return productAddressRepository
 			.findAll(e.product.status.eq(ProductStatus.TO_BUY), pageable)
 			.map(this::mapToDto);
+	}
+
+	@Override
+	public long getAmountOfProduct(long productId) {
+		return productAddressRepository
+			.findOne(e.product.id.eq(productId))
+			.map(ProductAddress::getProductAmount)
+			.map(ProductAmount::getAmount)
+			.orElse(0L);
 	}
 
 	@NotNull

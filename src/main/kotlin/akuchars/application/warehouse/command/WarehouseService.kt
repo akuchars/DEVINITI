@@ -29,10 +29,11 @@ class WarehouseService(
 ) {
 
     @Transactional
-    fun addNewProductToWarehouse(productDto: ProductDataDto, productLocalization: ProductLocalizationDto, amount: Long) {
+    fun addNewProductToWarehouse(productDto: ProductDataDto, productLocalization: ProductLocalizationDto, amount: Long): Long {
         val product = Product(ProductName(productDto.name), productDto.colorDto.toEntity(), Price(productDto.price))
-        productRepository.save(product)
+        val productId = productRepository.save(product).id
         createProductAddress(product, productLocalization, amount)
+        return productId
     }
 
     @Transactional

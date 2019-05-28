@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 
 interface ProductQueryService {
-    fun findProductsByName(productName: String): ProductsDto
-    fun findProductReadyToBuy(pageable: Pageable): Page<ProductDto>
+	fun getProductsByName(productName: String): ProductsDto
+	fun getProductReadyToBuy(pageable: Pageable): Page<ProductDto>
+	fun getAmountOfProduct(productId: Long): Long
 }

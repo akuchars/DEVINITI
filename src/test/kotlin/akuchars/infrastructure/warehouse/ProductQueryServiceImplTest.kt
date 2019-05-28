@@ -24,7 +24,7 @@ internal class ProductQueryServiceImplTest {
 		//given
 		val searchProductName = "Produkt1"
 		//when
-		val result = productQueryService.findProductsByName(searchProductName)
+		val result = productQueryService.getProductsByName(searchProductName)
 
 		//then
 		assertThat(result).isNotNull()
@@ -37,7 +37,7 @@ internal class ProductQueryServiceImplTest {
 		//given
 		val searchProductName = "Tego produktu na pewno nie ma w bazie"
 		//when
-		val result = productQueryService.findProductsByName(searchProductName)
+		val result = productQueryService.getProductsByName(searchProductName)
 
 		//then
 		assertThat(result).isNotNull()
@@ -47,7 +47,7 @@ internal class ProductQueryServiceImplTest {
 	@Test
 	fun `should find only ready to buy products`() {
 		//when
-		val result = productQueryService.findProductReadyToBuy(PageRequest.of(1, 200))
+		val result = productQueryService.getProductReadyToBuy(PageRequest.of(1, 200))
 
 		//then
 		assertThat(result).isNotNull()
