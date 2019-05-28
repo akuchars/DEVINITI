@@ -19,7 +19,7 @@ public class QStreet extends EntityPathBase<Street> {
 
     public static final QStreet street = new QStreet("street");
 
-    public final akuchars.domain.QAbstractJpaEntity _super = new akuchars.domain.QAbstractJpaEntity(this);
+    public final akuchars.domain.common.QAbstractJpaEntity _super = new akuchars.domain.common.QAbstractJpaEntity(this);
 
     //inherited
     public final NumberPath<Long> id = _super.id;

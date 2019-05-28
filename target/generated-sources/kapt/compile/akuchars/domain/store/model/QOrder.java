@@ -22,7 +22,7 @@ public class QOrder extends EntityPathBase<Order> {
 
     public static final QOrder order = new QOrder("order1");
 
-    public final akuchars.domain.QAbstractJpaEntity _super = new akuchars.domain.QAbstractJpaEntity(this);
+    public final akuchars.domain.common.QAbstractJpaEntity _super = new akuchars.domain.common.QAbstractJpaEntity(this);
 
     public final QClient client;
 

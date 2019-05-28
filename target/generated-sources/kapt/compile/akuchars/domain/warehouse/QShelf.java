@@ -19,7 +19,7 @@ public class QShelf extends EntityPathBase<Shelf> {
 
     public static final QShelf shelf = new QShelf("shelf");
 
-    public final akuchars.domain.QAbstractJpaEntity _super = new akuchars.domain.QAbstractJpaEntity(this);
+    public final akuchars.domain.common.QAbstractJpaEntity _super = new akuchars.domain.common.QAbstractJpaEntity(this);
 
     //inherited
     public final NumberPath<Long> id = _super.id;

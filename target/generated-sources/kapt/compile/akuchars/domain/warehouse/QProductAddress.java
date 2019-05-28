@@ -22,7 +22,7 @@ public class QProductAddress extends EntityPathBase<ProductAddress> {
 
     public static final QProductAddress productAddress = new QProductAddress("productAddress");
 
-    public final akuchars.domain.QAbstractJpaEntity _super = new akuchars.domain.QAbstractJpaEntity(this);
+    public final akuchars.domain.common.QAbstractJpaEntity _super = new akuchars.domain.common.QAbstractJpaEntity(this);
 
     //inherited
     public final NumberPath<Long> id = _super.id;

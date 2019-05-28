@@ -22,7 +22,7 @@ public class QClientAddress extends EntityPathBase<ClientAddress> {
 
     public static final QClientAddress clientAddress = new QClientAddress("clientAddress");
 
-    public final akuchars.domain.QAbstractJpaEntity _super = new akuchars.domain.QAbstractJpaEntity(this);
+    public final akuchars.domain.common.QAbstractJpaEntity _super = new akuchars.domain.common.QAbstractJpaEntity(this);
 
     public final StringPath buildingNumber = createString("buildingNumber");
 

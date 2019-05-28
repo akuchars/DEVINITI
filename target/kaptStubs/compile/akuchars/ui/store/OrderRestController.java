@@ -11,6 +11,8 @@ public class OrderRestController {
     @org.jetbrains.annotations.NotNull()
     @org.springframework.web.bind.annotation.PutMapping(value = {"/create"})
     @org.springframework.web.bind.annotation.ResponseStatus(value = org.springframework.http.HttpStatus.CREATED)
+    @io.swagger.annotations.ApiImplicitParams(value = {@io.swagger.annotations.ApiImplicitParam(dataType = "long", paramType = "query", required = true, value = "Client id", name = "clientId"), @io.swagger.annotations.ApiImplicitParam(dataTypeClass = akuchars.ui.rest.dto.OrderRestDto.class, paramType = "body", required = true, value = "Order to submit", name = "orderRestDto")})
+    @io.swagger.annotations.ApiOperation(value = "Create new order")
     public akuchars.ui.rest.dto.OrderRestDto createNewOrder(@org.springframework.web.bind.annotation.RequestParam()
     long clientId, @org.jetbrains.annotations.NotNull()
     @org.springframework.web.bind.annotation.RequestBody()
