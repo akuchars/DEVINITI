@@ -30,7 +30,7 @@ class ProductRestController(
 	private val productQueryService: ProductQueryService
 ) {
 
-	@ApiOperation("Create new order")
+	@ApiOperation("Mark product ready to be buy")
 	@ApiImplicitParams(
 		ApiImplicitParam(name = "productId", value = "Product id", required = true, dataType = "long", paramType = "path"),
 		ApiImplicitParam(name = "amount", value = "Amount to sale product", required = true, dataType = "long", paramType = "query")
